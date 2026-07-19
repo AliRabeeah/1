@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ali Halim — Links</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .animate-spin-slow {
+      animation: spin-slow 8s linear infinite;
+    }
+
+    @keyframes fade-in-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-up {
+      animation: fade-in-up 0.8s ease-out forwards;
+    }
+
+    @keyframes ripple {
+      0% { transform: scale(0); opacity: 0.5; }
+      100% { transform: scale(4); opacity: 0; }
+    }
+
+    .link-card {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .link-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .link-card:hover::before {
+      opacity: 1;
+    }
+
+    .link-card:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 30px rgba(249, 115, 22, 0.15), 0 4px 20px rgba(0, 0, 0, 0.3);
+      border-color: rgba(249, 115, 22, 0.5);
+    }
+
+    .link-card:active {
+      transform: scale(0.98);
+    }
+
+    .ripple-effect {
+      position: absolute;
+      border-radius: 50%;
+      animation: ripple 0.6s ease-out forwards;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: float-up linear infinite;
+    }
+
+    @keyframes float-up {
+      0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+      10% { opacity: 1; transform: translateY(90vh) translateX(10px) scale(1); }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) translateX(-20px) scale(0); opacity: 0; }
+    }
+
+    .shimmer {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shimmer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 200%; }
+    }
+
+    /* Light Mode Styles */
+    .light-mode {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+      color: #1e293b !important;
+    }
+
+    .light-mode .link-card {
+      background: rgba(255, 255, 255, 0.9) !important;
+      border-color: rgba(249, 115, 22, 0.2) !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .light-mode .link-card:hover {
+      box-shadow: 0 0 30px rgba(249, 115, 22, 0.2), 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+      border-color: rgba(249, 115, 22, 0.6) !important;
+    }
+
+    .light-mode #subtitle {
+      color: #64748b !important;
+    }
+
+    .light-mode #footer-text {
+      color: #94a3b8 !important;
+    }
+
+    .light-mode #avatar-bg {
+      background: linear-gradient(135deg, #f1f5f9, #e2e8f0) !important;
+      border-color: rgba(249, 115, 22, 0.4) !important;
+    }
+
+    .light-mode #status-dot {
+      border-color: #f8fafc !important;
+    }
+
+    .light-mode #line-left {
+      background: linear-gradient(to right, transparent, rgba(249, 115, 22, 0.3)) !important;
+    }
+
+    .light-mode #line-right {
+      background: linear-gradient(to left, transparent, rgba(249, 115, 22, 0.3)) !important;
+    }
+
+    .light-mode .particle {
+      background: rgba(249, 115, 22, 0.4) !important;
+    }
+
+    .light-mode #theme-toggle {
+      background: #e2e8f0 !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .light-mode #toggle-label {
+      color: #64748b !important;
+    }
+
+    .light-mode #ambient-glow-1 {
+      background: rgba(249, 115, 22, 0.08) !important;
+    }
+
+    .light-mode #ambient-glow-2 {
+      background: rgba(249, 115, 22, 0.05) !important;
+    }
+
+    .light-mode .link-card h3 {
+      color: #1e293b !important;
+    }
+
+    .light-mode .link-card:hover h3 {
+      color: #ea580c !important;
+    }
+
+    .light-mode .link-card svg {
+      color: #94a3b8 !important;
+    }
+
+    .light-mode .link-card:hover svg {
+      color: #ea580c !important;
+    }
+
+    .light-mode .link-card > div:last-child {
+      background: #f1f5f9 !important;
+    }
+
+    .light-mode .link-card:hover > div:last-child {
+      background: rgba(249, 115, 22, 0.15) !important;
+    }
+
+    /* Toggle animation */
+    .toggle-bounce {
+      animation: toggle-bounce 0.5s ease;
+    }
+
+    @keyframes toggle-bounce {
+      0%, 100% { transform: translateX(var(--tx, 0)) scale(1); }
+      50% { transform: translateX(var(--tx, 0)) scale(1.2); }
+    }
+
+    /* Stars for light mode background */
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(249, 115, 22, 0.3);
+      border-radius: 50%;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+  </style>
+</head>
+<body>
+
+<div id="bio-app" class="min-h-screen bg-black text-white relative overflow-hidden flex flex-col items-center justify-center p-6 transition-colors duration-700">
+  <!-- Animated Background Particles -->
+  <div id="particles" class="absolute inset-0 pointer-events-none"></div>
+
+  <!-- Ambient Glow -->
+  <div id="ambient-glow-1" class="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-orange-500/10 rounded-full blur-[120px] animate-pulse transition-all duration-700"></div>
+  <div id="ambient-glow-2" class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-orange-600/5 rounded-full blur-[100px] animate-pulse transition-all duration-700" style="animation-delay: 1s;"></div>
+
+  <!-- Theme Toggle Button -->
+  <button id="theme-toggle" class="fixed top-6 right-6 z-50 w-14 h-8 rounded-full bg-zinc-800 border border-zinc-700 flex items-center p-1 cursor-pointer transition-all duration-500 hover:scale-110 hover:border-orange-500/50 group shadow-lg shadow-orange-500/10">
+    <div id="toggle-circle" class="w-6 h-6 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center transition-all duration-500 transform translate-x-0 shadow-md">
+      <!-- Sun Icon -->
+      <svg id="sun-icon" class="w-3.5 h-3.5 text-white transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="4" stroke-width="2"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/>
+      </svg>
+      <!-- Moon Icon -->
+      <svg id="moon-icon" class="w-3.5 h-3.5 text-white absolute opacity-0 rotate-90 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+      </svg>
+    </div>
+    <span id="toggle-label" class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-zinc-500 tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">Dark</span>
+  </button>
+
+  <!-- Main Content Card -->
+  <div class="relative z-10 w-full max-w-md">
+
+    <!-- Profile Section -->
+    <div class="text-center mb-10 group cursor-default" id="profile-section">
+      <!-- Avatar Ring -->
+      <div class="relative inline-block mb-6">
+        <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600 rounded-full opacity-75 blur-sm group-hover:opacity-100 group-hover:blur-md transition-all duration-500 animate-spin-slow"></div>
+        <div id="avatar-bg" class="relative w-24 h-24 rounded-full bg-gradient-to-br from-zinc-800 to-black border-2 border-orange-500/30 flex items-center justify-center overflow-hidden transition-all duration-700">
+          <span class="text-4xl font-bold bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">AH</span>
+        </div>
+        <!-- Status Dot -->
+        <div class="absolute bottom-1 right-1 w-5 h-5 bg-green-500 rounded-full border-4 border-black animate-bounce transition-all duration-700" id="status-dot"></div>
+      </div>
+
+      <!-- Name -->
+      <h1 id="name-display" class="text-4xl md:text-5xl font-bold tracking-tight mb-2 cursor-pointer select-none">
+        <span class="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-300 bg-clip-text text-transparent transition-all duration-700">Ali Halim</span>
+      </h1>
+      <p id="subtitle" class="text-zinc-400 text-sm tracking-widest uppercase opacity-0 animate-fade-in-up transition-colors duration-700" style="animation-delay: 0.5s; animation-fill-mode: forwards;">Digital Creator</p>
+
+      <!-- Decorative Line -->
+      <div class="mt-4 flex items-center justify-center gap-2 opacity-0 animate-fade-in-up transition-all duration-700" style="animation-delay: 0.7s; animation-fill-mode: forwards;">
+        <div class="h-px w-12 bg-gradient-to-r from-transparent to-orange-500/50 transition-all duration-700" id="line-left"></div>
+        <div class="w-2 h-2 bg-orange-500 rounded-full animate-ping transition-all duration-700" id="center-dot"></div>
+        <div class="h-px w-12 bg-gradient-to-l from-transparent to-orange-500/50 transition-all duration-700" id="line-right"></div>
+      </div>
+    </div>
+
+    <!-- Links Container -->
+    <div id="links-container" class="space-y-4">
+      <!-- Links injected by JS -->
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-12 text-center opacity-0 animate-fade-in-up transition-all duration-700" style="animation-delay: 1.5s; animation-fill-mode: forwards;">
+      <p id="footer-text" class="text-zinc-600 text-xs tracking-wider transition-colors duration-700">Made with <span class="text-orange-500 animate-pulse">⚡</span> by Ali Halim</p>
+    </div>
+  </div>
+
+  <!-- Custom Cursor Trail (Desktop only) -->
+  <div id="cursor-trail" class="hidden md:block fixed pointer-events-none z-50 w-4 h-4 rounded-full bg-orange-500/30 blur-sm transition-transform duration-100"></div>
+</div>
+
+<script>
+  // ========== EDIT YOUR LINKS HERE ==========
+  const links = [
+    { title: 'Instagram', icon: '📸', url: 'https://instagram.com/YOUR_USERNAME', color: 'from-pink-500 via-purple-500 to-orange-500' },
+    { title: 'TikTok', icon: '🎵', url: 'https://tiktok.com/@YOUR_USERNAME', color: 'from-cyan-400 to-pink-500' },
+    { title: 'YouTube', icon: '▶️', url: 'https://youtube.com/@YOUR_USERNAME', color: 'from-red-500 to-red-700' },
+    { title: 'Twitter / X', icon: '🐦', url: 'https://twitter.com/YOUR_USERNAME', color: 'from-blue-400 to-blue-600' },
+    { title: 'Portfolio', icon: '💼', url: 'https://yourportfolio.com', color: 'from-orange-400 to-orange-600' },
+    { title: 'Contact Me', icon: '✉️', url: 'mailto:your.email@example.com', color: 'from-emerald-400 to-emerald-600' }
+  ];
+  // ==========================================
+
+  let isDark = true;
+  const app = document.getElementById('bio-app');
+  const toggleBtn = document.getElementById('theme-toggle');
+  const toggleCircle = document.getElementById('toggle-circle');
+  const sunIcon = document.getElementById('sun-icon');
+  const moonIcon = document.getElementById('moon-icon');
+  const toggleLabel = document.getElementById('toggle-label');
+  const particlesContainer = document.getElementById('particles');
+
+  // Render Links
+  const container = document.getElementById('links-container');
+  links.forEach((link, index) => {
+    const btn = document.createElement('a');
+    btn.href = link.url;
+    btn.target = '_blank';
+    btn.className = `link-card shimmer group relative flex items-center gap-4 p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800 backdrop-blur-sm opacity-0 animate-fade-in-up`;
+    btn.style.animationDelay = `${0.3 + (index * 0.1)}s`;
+    btn.style.animationFillMode = 'forwards';
+
+    btn.innerHTML = `
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center text-lg shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+        ${link.icon}
+      </div>
+      <div class="flex-1">
+        <h3 class="font-semibold text-white group-hover:text-orange-400 transition-colors duration-300">${link.title}</h3>
+      </div>
+      <div class="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center group-hover:bg-orange-500/20 group-hover:translate-x-1 transition-all duration-300">
+        <svg class="w-4 h-4 text-zinc-400 group-hover:text-orange-400 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    `;
+
+    // Ripple effect on click
+    btn.addEventListener('click', function(e) {
+      const rect = this.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple-effect';
+      const size = Math.max(rect.width, rect.height);
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+      ripple.style.background = isDark ? 'rgba(249, 115, 22, 0.3)' : 'rgba(249, 115, 22, 0.2)';
+      this.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+
+    container.appendChild(btn);
+  });
+
+  // Theme Toggle
+  toggleBtn.addEventListener('click', () => {
+    isDark = !isDark;
+
+    toggleCircle.style.setProperty('--tx', isDark ? '0px' : '24px');
+    toggleCircle.classList.add('toggle-bounce');
+    setTimeout(() => toggleCircle.classList.remove('toggle-bounce'), 500);
+
+    if (isDark) {
+      app.classList.remove('light-mode');
+      app.classList.add('bg-black');
+      toggleCircle.style.transform = 'translateX(0)';
+      toggleCircle.style.background = 'linear-gradient(135deg, #fb923c, #ea580c)';
+      sunIcon.style.opacity = '1';
+      sunIcon.style.transform = 'rotate(0deg)';
+      moonIcon.style.opacity = '0';
+      moonIcon.style.transform = 'rotate(90deg)';
+      toggleLabel.textContent = 'Dark';
+      toggleBtn.style.boxShadow = '0 4px 15px rgba(249, 115, 22, 0.1)';
+
+      document.querySelectorAll('.particle').forEach(p => {
+        p.style.background = 'rgba(249, 115, 22, 0.6)';
+      });
+
+      document.querySelectorAll('.star').forEach(s => s.remove());
+    } else {
+      app.classList.add('light-mode');
+      app.classList.remove('bg-black');
+      toggleCircle.style.transform = 'translateX(24px)';
+      toggleCircle.style.background = 'linear-gradient(135deg, #f97316, #c2410c)';
+      sunIcon.style.opacity = '0';
+      sunIcon.style.transform = 'rotate(-90deg)';
+      moonIcon.style.opacity = '1';
+      moonIcon.style.transform = 'rotate(0deg)';
+      toggleLabel.textContent = 'Light';
+      toggleBtn.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+
+      document.querySelectorAll('.particle').forEach(p => {
+        p.style.background = 'rgba(249, 115, 22, 0.4)';
+      });
+
+      for (let i = 0; i < 15; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.animationDelay = Math.random() * 3 + 's';
+        particlesContainer.appendChild(star);
+      }
+    }
+  });
+
+  // Particle System
+  function createParticle() {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + 'vw';
+    particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+    particle.style.animationDelay = Math.random() * 5 + 's';
+    particle.style.opacity = Math.random() * 0.5 + 0.2;
+    const size = Math.random() * 6 + 2;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    particle.style.background = isDark ? 'rgba(249, 115, 22, 0.6)' : 'rgba(249, 115, 22, 0.4)';
+    particlesContainer.appendChild(particle);
+
+    setTimeout(() => particle.remove(), 20000);
+  }
+
+  for (let i = 0; i < 20; i++) {
+    setTimeout(createParticle, i * 300);
+  }
+  setInterval(createParticle, 2000);
+
+  // Cursor Trail (Desktop)
+  const cursorTrail = document.getElementById('cursor-trail');
+  let mouseX = 0, mouseY = 0;
+  let trailX = 0, trailY = 0;
+
+  if (window.innerWidth > 768) {
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateTrail() {
+      trailX += (mouseX - trailX) * 0.1;
+      trailY += (mouseY - trailY) * 0.1;
+      cursorTrail.style.left = trailX - 8 + 'px';
+      cursorTrail.style.top = trailY - 8 + 'px';
+      requestAnimationFrame(animateTrail);
+    }
+    animateTrail();
+  }
+
+  // Magnetic effect on links
+  document.querySelectorAll('.link-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      card.style.transform = `translate(${x * 0.05}px, ${y * 0.05}px) scale(1.02)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+
+  // Name glitch effect on hover
+  const nameDisplay = document.getElementById('name-display');
+  const originalText = 'Ali Halim';
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+
+  nameDisplay.addEventListener('mouseenter', () => {
+    let iterations = 0;
+    const interval = setInterval(() => {
+      nameDisplay.innerHTML = `<span class="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-300 bg-clip-text text-transparent transition-all duration-700">${originalText.split('').map((char, index) => {
+        if (index < iterations) return originalText[index];
+        return chars[Math.floor(Math.random() * chars.length)];
+      }).join('')}</span>`;
+
+      if (iterations >= originalText.length) clearInterval(interval);
+      iterations += 1/3;
+    }, 30);
+  });
+
+  nameDisplay.addEventListener('mouseleave', () => {
+    nameDisplay.innerHTML = `<span class="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-300 bg-clip-text text-transparent transition-all duration-700">${originalText}</span>`;
+  });
+
+  // 3D Tilt on profile
+  const profileSection = document.querySelector('#profile-section');
+  profileSection.addEventListener('mousemove', (e) => {
+    const rect = profileSection.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    profileSection.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
+  });
+
+  profileSection.addEventListener('mouseleave', () => {
+    profileSection.style.transform = 'perspective(1000px) rotateY(0) rotateX(0)';
+  });
+
+  // Keyboard shortcut: Press 'T' to toggle
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 't' || e.key === 'T') {
+      toggleBtn.click();
+    }
+  });
+</script>
+
+</body>
+</html>
