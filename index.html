@@ -213,6 +213,7 @@
       50% { opacity: 1; transform: scale(1.5); }
     }
   </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -249,7 +250,7 @@
       <div class="relative inline-block mb-6">
         <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600 rounded-full opacity-75 blur-sm group-hover:opacity-100 group-hover:blur-md transition-all duration-500 animate-spin-slow"></div>
         <div id="avatar-bg" class="relative w-24 h-24 rounded-full bg-gradient-to-br from-zinc-800 to-black border-2 border-orange-500/30 flex items-center justify-center overflow-hidden transition-all duration-700">
-          <span class="text-4xl font-bold bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">AH</span>
+          <img src="https://raw.githubusercontent.com/AliRabeeah/1/358109234572c2611d0da7b90750c27467b88656/IMG_20260605_134226_625.jpg" alt="Ali Halim" class="w-full h-full object-cover">
         </div>
         <!-- Status Dot -->
         <div class="absolute bottom-1 right-1 w-5 h-5 bg-green-500 rounded-full border-4 border-black animate-bounce transition-all duration-700" id="status-dot"></div>
@@ -287,12 +288,10 @@
 <script>
   // ========== EDIT YOUR LINKS HERE ==========
   const links = [
-    { title: 'Instagram', icon: '📸', url: 'https://instagram.com/YOUR_USERNAME', color: 'from-pink-500 via-purple-500 to-orange-500' },
-    { title: 'TikTok', icon: '🎵', url: 'https://tiktok.com/@YOUR_USERNAME', color: 'from-cyan-400 to-pink-500' },
-    { title: 'YouTube', icon: '▶️', url: 'https://youtube.com/@YOUR_USERNAME', color: 'from-red-500 to-red-700' },
-    { title: 'Twitter / X', icon: '🐦', url: 'https://twitter.com/YOUR_USERNAME', color: 'from-blue-400 to-blue-600' },
-    { title: 'Portfolio', icon: '💼', url: 'https://yourportfolio.com', color: 'from-orange-400 to-orange-600' },
-    { title: 'Contact Me', icon: '✉️', url: 'mailto:your.email@example.com', color: 'from-emerald-400 to-emerald-600' }
+    { title: 'Instagram', icon: 'https://kimi-web-img.moonshot.cn/img/static.vecteezy.com/f34577779083e83aa9eb4b3672dcea860674719f.png', url: 'https://instagram.com/YOUR_USERNAME', color: 'from-pink-500 via-purple-500 to-orange-500' },
+    { title: 'Facebook', icon: 'https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/fdbf5038ca79d5c642a070ce6b1511cd5c0ee634.png', url: 'https://facebook.com/YOUR_USERNAME', color: 'from-blue-600 to-blue-800' },
+    { title: 'Snapchat', icon: 'https://kimi-web-img.moonshot.cn/img/static.vecteezy.com/35eb86db335c7ad29e32455edc2a537c389e19be.png', url: 'https://snapchat.com/add/YOUR_USERNAME', color: 'from-yellow-400 to-yellow-500' },
+    { title: 'Substack', icon: 'https://kimi-web-img.moonshot.cn/img/img.icons8.com/213d34a68355c634755bb1e4e1b2dbfc94d39e73.png', url: 'https://substack.com/@YOUR_USERNAME', color: 'from-orange-500 to-red-600' }
   ];
   // ==========================================
 
@@ -316,8 +315,8 @@
     btn.style.animationFillMode = 'forwards';
 
     btn.innerHTML = `
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center text-lg shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
-        ${link.icon}
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br ${link.color} flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 overflow-hidden">
+        <img src="${link.icon}" alt="${link.title}" class="w-7 h-7 object-contain" loading="lazy">
       </div>
       <div class="flex-1">
         <h3 class="font-semibold text-white group-hover:text-orange-400 transition-colors duration-300">${link.title}</h3>
